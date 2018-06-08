@@ -17,6 +17,14 @@ class AllMoviesView: UIView {
         return view
     }()
 
+    private var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.searchBarStyle = .minimal
+        (searchBar.value(forKey: "searchField") as? UITextField)?.textColor = .white
+        return searchBar
+    }()
+
     private var synopsisView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -52,6 +60,12 @@ class AllMoviesView: UIView {
         topView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         topView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         topView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
+
+        topView.addSubview(searchBar)
+        searchBar.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -5).isActive = true
+        searchBar.topAnchor.constraint(equalTo: topView.topAnchor, constant: 10).isActive = true
+        searchBar.widthAnchor.constraint(equalTo: topView.widthAnchor, multiplier: 0.5).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 
     private func setSynopsisView() {
