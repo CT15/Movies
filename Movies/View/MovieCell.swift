@@ -45,7 +45,7 @@ class MovieCell: UICollectionViewCell {
         movieTitle.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 10).isActive = true
         movieTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
         movieTitle.widthAnchor.constraint(equalTo: widthAnchor, constant: -10).isActive = true
-        movieTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        movieTitle.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 
     func setMovieTitle(_ title: String, withImage image: UIImage? = nil) {
