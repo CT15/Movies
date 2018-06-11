@@ -50,8 +50,9 @@ class AllMoviesView: UIView {
         backgroundColor = .white
         setTopView()
         setSynopsisView()
-        setTableView()
         setSelectedMovieImage()
+        setSearchBar()
+        setTableView()
     }
 
     private func setTopView() {
@@ -60,12 +61,6 @@ class AllMoviesView: UIView {
         topView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         topView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         topView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
-
-        topView.addSubview(searchBar)
-        searchBar.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -5).isActive = true
-        searchBar.topAnchor.constraint(equalTo: topView.topAnchor, constant: 10).isActive = true
-        searchBar.widthAnchor.constraint(equalTo: topView.widthAnchor, multiplier: 0.5).isActive = true
-        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 
     private func setSynopsisView() {
@@ -94,6 +89,14 @@ class AllMoviesView: UIView {
         selectedMovieImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3, constant: -40).isActive = true
         selectedMovieImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         selectedMovieImage.widthAnchor.constraint(equalTo: selectedMovieImage.heightAnchor).isActive = true
+    }
+
+    private func setSearchBar() {
+        topView.addSubview(searchBar)
+        searchBar.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -5).isActive = true
+        searchBar.topAnchor.constraint(equalTo: topView.topAnchor, constant: 10).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: selectedMovieImage.trailingAnchor, constant: 5).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
