@@ -12,12 +12,15 @@ class MovieImageView: UIImageView {
 
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
-        backgroundColor = .blue   // TODO: to change
         translatesAutoresizingMaskIntoConstraints = false
+        image = UIImage(named: "placeholder")
 
         layer.cornerRadius = 10.0
         layer.shadowOffset = CGSize(width: -2, height: 2)
         layer.shadowOpacity = 0.5
+
+        contentMode = .scaleAspectFill
+        clipsToBounds = true
     }
 
     required init?(coder aDecoder: NSCoder) {

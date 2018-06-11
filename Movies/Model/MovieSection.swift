@@ -33,10 +33,9 @@ struct MovieSection {
         }
 
         toAdd.forEach {
-            // TODO: uncomment
-//            guard !moviesSet.contains($0) else {
-//                return
-//            }
+            guard !moviesSet.contains($0) else {
+                return
+            }
             self.movies.append($0)
             self.moviesSet.insert($0)
         }

@@ -6,7 +6,11 @@
 //  Copyright © 2018 Calvin Tantio. All rights reserved.
 //
 
-struct Movie {
+struct Movies: Decodable {
+    let movies: [Movie]
+}
+
+struct Movie: Decodable {
 
     let title: String
     let synopsis: String?

@@ -10,14 +10,14 @@ import UIKit
 
 class AllMoviesView: UIView {
 
-    private var topView: UIView = {
+    var topView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         return view
     }()
 
-    private var searchBar: UISearchBar = {
+    var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchBarStyle = .minimal
@@ -25,14 +25,14 @@ class AllMoviesView: UIView {
         return searchBar
     }()
 
-    private var synopsisView: UIView = {
+    var synopsisView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .green
         return view
     }()
 
-    private var sectionTableView: UITableView = {
+    var sectionTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(SectionTableCell.self, forCellReuseIdentifier: SectionTableCell.identifier)
@@ -43,7 +43,7 @@ class AllMoviesView: UIView {
         return tableView
     }()
 
-    private var selectedMovieImage = MovieImageView()
+    var selectedMovieImage = MovieImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,6 +74,10 @@ class AllMoviesView: UIView {
         synopsisView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
         synopsisView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         synopsisView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
+    }
+
+    func expandSynopsisView() {
+        
     }
 
     private func setTableView() {

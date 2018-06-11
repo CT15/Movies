@@ -15,8 +15,10 @@ class MovieCell: UICollectionViewCell {
     
     private var movieTitle: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .red
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 15)
         return label
     }()
 

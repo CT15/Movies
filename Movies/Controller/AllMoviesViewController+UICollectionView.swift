@@ -12,20 +12,21 @@ extension AllMoviesViewController: UICollectionViewDataSource, UICollectionViewD
 
     // MARK: - Collection View Data Source methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.getNumberOfMoviesIn(section: collectionView.tag)
+        let sectionVM = viewModel.getMoviesSectionViewModel(at: collectionView.tag)
+        return sectionVM.numberOfMovies
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier,
-                                                            for: indexPath) as? MovieCell else {
-                                                                fatalError("UICollectionViewCell must be downcasted to MovieCell")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+            MovieCell.identifier, for: indexPath) as? MovieCell else {
+                fatalError("UICollectionViewCell must be downcasted to MovieCell")
         }
 
-        let section = collectionView.tag
-        let row = indexPath.row
+        let sectionVM = viewModel.getMoviesSectionViewModel(at: collectionView.tag)
+        let movieCellVM = sectionVM.getMovieCellViewModel(at: indexPath.row)
 
-        cell.setMovieTitle(viewModel.getMovieTitle(section: section, row: row),
-                           withImage: viewModel.getMovieImage(section: section, row: row))
+        cell.setMovieTitle(movieCellVM.title,
+                           withImage: UIImage(named: movieCellVM.imageLink))
 
         return cell
     }

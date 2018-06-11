@@ -8,47 +8,95 @@
 
 import UIKit
 
-struct AllMoviesViewModel {
-    let movieSection: [MovieSection]
-    var movies: [[(title: String, image: UIImage?)]]
+class AllMoviesViewModel {
+    let apiService: APIServiceProtocol
 
-    var numberOfSections: Int {
-        return movieSection.count
-    }
-
-    init(movieSection: MovieSection...) {
-        self.init(movieSection: movieSection)
-    }
-
-    init(movieSection: [MovieSection]) {
-        self.movieSection = movieSection
-        movies = []
-
-        movieSection.forEach {
-            var value = [(title: String, image: UIImage?)]()
-
-            $0.movies.forEach {
-                value.append((title: $0.title,
-                              image: UIImage(named: $0.imageLink ?? "")))
-            }
-
-            movies.append(value)
+    private var sections: [MovieSection] = [MovieSection]() {
+        didSet {
+            self.setMoviesSectionViewModels()
         }
     }
 
-    func getNumberOfMoviesIn(section: Int) -> Int {
-        return movieSection[section].movies.count
+    var numberOfSections: Int {
+        return sections.count
     }
 
-    func getGenreforSection(section: Int) -> String {
-        return movieSection[section].genre.rawValue.capitalized
+    var moviesSectionViewModels: [MoviesSectionViewModel] = [MoviesSectionViewModel]() {
+        didSet {
+            self.reloadTableViewClosure?()
+        }
     }
 
-    func getMovieTitle(section: Int, row: Int) -> String {
-        return movies[section][row].title
+    var isLoading: Bool = false {
+        didSet {
+            self.updateLoadingStatus?()
+        }
     }
 
-    func getMovieImage(section: Int, row: Int) -> UIImage {
-        return movies[section][row].image ?? UIImage() // TODO: give default picture
+    var alertMessage: String? {
+        didSet {
+            self.showAlertClosure?()
+        }
+    }
+
+    var reloadTableViewClosure: (()->())?
+    var updateLoadingStatus: (()->())?
+    var showAlertClosure: (()->())?
+
+    init(apiService: APIServiceProtocol = APIService()) {
+        self.apiService = apiService
+        initFetch()
+    }
+
+    func getMoviesSectionViewModel(at section: Int) -> MoviesSectionViewModel {
+        return moviesSectionViewModels[section]
+    }
+
+    func initFetch() {
+        self.isLoading = true
+        apiService.fetchAllMovies { [weak self] (success, movies, error) in
+            self?.isLoading = false
+            if let error = error {
+                self?.alertMessage = error.rawValue
+            } else {
+                self?.processFetchedMovies(movies: movies)
+            }
+        }
+    }
+
+    private func processFetchedMovies(movies: [Movie]) {
+        var sectionDict = [MovieGenre: [Movie]]()
+
+        movies.forEach { (movie) in
+            movie.genres.forEach { (genre) in
+                if sectionDict[genre] == nil {
+                    sectionDict[genre] = []
+                }
+
+                sectionDict[genre]?.append(movie)
+            }
+        }
+
+        var tempSections = [MovieSection]()
+
+        sectionDict.keys.forEach {
+            tempSections.append(MovieSection(genre: $0, movies: sectionDict[$0]))
+        }
+
+        self.sections = tempSections
+    }
+
+    private func setMoviesSectionViewModels() {
+        var tempMoviesSectionViewModels = [MoviesSectionViewModel]()
+
+        sections.forEach {
+            tempMoviesSectionViewModels.append(createMoviesSectionViewModel($0))
+        }
+
+        self.moviesSectionViewModels = tempMoviesSectionViewModels
+    }
+
+    private func createMoviesSectionViewModel(_ section: MovieSection) -> MoviesSectionViewModel {
+        return MoviesSectionViewModel(genre: section.genre.rawValue.capitalized, movies: section.movies)
     }
 }

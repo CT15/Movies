@@ -1,0 +1,46 @@
+{
+    "movies": [
+        {
+            "title": "The Ancient Magus' Bride",
+            "synopsis": "All I wanted was to be a girl falling asleep in a boy’s arms and not caring about anything else in the world except how I feel right there with him. Just give me a hug and wipe away my tears. Smile at me and promise that everything will be okay. Sit here and listen. Tell me I’m fine the way I am cause it always sounds best coming from you. Hug me and say that I don’t deserve this because I’m starting to believe that I do. Please just once be there to steady my shaking hand. Be there to laugh away all my problems. Be there to tell me that it’s all going to be okay. And then you came along and your so much more then that.",
+            "imageLink": "pic1",
+            "genres": ["action", "romance"]
+        },
+        {
+            "title": "Danganronpa",
+            "synopsis": "Love is what we are born with. Fear is what we learn. The spiritual journey is the unlearning of fear and prejudices and the acceptance of love back in our hearts. Love is the essential reality and our purpose on earth. To be consciously aware of it, to experience love in ourselves and others, is the meaning of life. Meaning does not lie in things. Meaning lies in us.",
+            "imageLink": "pic2",
+            "genres": ["action", "romance"]
+        },
+        {
+            "title": "Tokyo Ghoul",
+            "synopsis": "Maybe our old wounds teach us something. They remind us where we’ve been and what we’ve overcome. They teach us lessons about what to avoid in the future. That’s what we like to think. But that’s not always the way it is. Sometimes there are things we just have to learn over again.",
+            "imageLink": "pic3",
+            "genres": ["horror", "romance"]
+        },
+        {
+            "title": "One Piece",
+            "synopsis": "I love you because I know you’re always there… there to catch me when I fall… there to listen when I need you, there when I feel alone. I love you because you understand me… you know how I feel even when I can’t say it… you know I’m not as strong as I say and still you never let me know that I’m not fooling you. I love you because you make me believe, believe that I am not worthless… believe that I can be loved, am loved, and can love others. I love you because you know, you know I feel this way but can’t say it and still you wait… letting me take my time to come to terms with the fact that I love you… would give my life up to be with you… and about all… never hurt you… lie to you… or leave you. Now I hope you understand.",
+            "imageLink": "pic4",
+            "genres": ["horror", "romance"]
+        },
+        {
+            "title": "Trigun",
+            "synopsis": "A girl asked a boy if she was pretty. He said no. Then she asked him he liked her and he said no. She asked him if he wanted to be with her forever. He said no. She then asked him if he would cry if she walked away. He again said no. She had heard too much. She needed to leave. As she walked away, he grabbed her arm and told her to stay. He said “You’re not pretty, you’re beautiful. I don’t like you, I love you. I don’t want to be with you forever, I need to be with you forever, and I wouldn’t cry if you walked away, I would die.",
+            "imageLink": "pic5",
+            "genres": ["horror", "romance", "action"]
+        },
+        {
+            "title": "Dragon Ball",
+            "synopsis": "I remember the first day I saw you, I remember the first day we spoke. I remember the night you held me close in your arms as we danced to our song. I remember saying I love you each time we hung up the phone. But it was the times you just looked at me. Then I knew you would always be in my heart and nothing could ever change that.",
+            "imageLink": "pic6",
+            "genres": ["horror", "action"]
+        },
+        {
+            "title": "My Hero Academia",
+            "synopsis": "As we grow up, we learn that the one person who wasn’t supposed to let you down probably will. You will have your heart broken, probably more than once, and it’s never easier the second time around. You’ll break hearts too, so remember how it felt when yours was broken. You’ll fight with your best friend, and may even fall in love with them. You’ll blame a new love for things an old one did. You’ll cry cause time is passing too fast. You’ll eventually lose someone you love. Life is short, so take too many pictures, laugh way too much, kiss way too slow, cry way too hard, and love everyone.",
+            "imageLink": "pic7",
+            "genres": ["action", "horror"]
+        }
+    ]
+}

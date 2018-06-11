@@ -6,7 +6,7 @@
 //  Copyright © 2018 Calvin Tantio. All rights reserved.
 //
 
-enum MovieGenre: String {
+enum MovieGenre: String, Decodable {
     case horror
     case action
     case romance

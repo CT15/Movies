@@ -16,9 +16,9 @@ extension AllMoviesViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SectionTableCell.identifier,
-                                                       for: indexPath) as? SectionTableCell else {
-                                                        fatalError("UITableViewCell must be downcasted to SectionTableCell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:
+            SectionTableCell.identifier, for: indexPath) as? SectionTableCell else {
+                fatalError("UITableViewCell must be downcasted to SectionTableCell")
         }
 
         return cell
@@ -28,7 +28,9 @@ extension AllMoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let sectionTableCell = cell as? SectionTableCell else { return }
 
-        sectionTableCell.setGenreLabelText(viewModel.getGenreforSection(section: indexPath.row))
+        let sectionVM = viewModel.getMoviesSectionViewModel(at: indexPath.row)
+
+        sectionTableCell.setGenreLabelText(sectionVM.genre)
         sectionTableCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
     }
 

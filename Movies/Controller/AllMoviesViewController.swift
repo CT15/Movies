@@ -10,8 +10,12 @@ import UIKit
 
 class AllMoviesViewController: UIViewController {
 
-    var moviesTable: UITableView!
     var viewModel: AllMoviesViewModel!
+
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        return activityIndicator
+    }()
 
     override var prefersStatusBarHidden: Bool {
         return true
@@ -20,35 +24,56 @@ class AllMoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // TODO: change these dummy values
-        let movie10 = Movie(title: "Hi there0", genres: .romance)
-        let movie11 = Movie(title: "Hi there1", genres: .romance)
-        let movie12 = Movie(title: "Hi there2", genres: .romance)
-        let movie13 = Movie(title: "Hi there3", genres: .romance)
-        let movie14 = Movie(title: "Hi there4", genres: .romance)
-        let movie15 = Movie(title: "Hi there5", genres: .romance)
-        let movieSection1 = MovieSection(genre: .romance, movies: [movie10, movie11, movie12, movie13, movie14, movie15])
-        let movie20 = Movie(title: "Hi0", genres: .action)
-        let movie21 = Movie(title: "Hi1", genres: .action)
-        let movie22 = Movie(title: "Hi2", genres: .action)
-        let movie23 = Movie(title: "Hi3", genres: .action)
-        let movie24 = Movie(title: "Hi4", genres: .action)
-        var movieSection2 = MovieSection(genre: .action)
-        movieSection2.add(movies: movie20, movie21, movie22, movie23, movie24)
-        var movieSection3 = MovieSection(genre: .horror)
-        let movie30 = Movie(title: "Hi0", genres: .horror)
-        let movie31 = Movie(title: "Hi1", genres: .horror)
-        let movie32 = Movie(title: "Hi2", genres: .horror)
-        let movie33 = Movie(title: "Hi3", genres: .horror)
-        let movie34 = Movie(title: "Hi4", genres: .horror)
-        let movie35 = Movie(title: "Hi5", genres: .horror)
-        let movie36 = Movie(title: "Hi6", genres: .horror)
-        let movie37 = Movie(title: "Hi7", genres: .horror)
-        movieSection3.add(movies: movie30, movie31, movie32, movie33, movie34, movie35, movie36, movie37)
+        activityIndicator.center = view.center
 
-        // viewModel must be initialised before view as table view in view requires view model
-        viewModel = AllMoviesViewModel(movieSection: movieSection1, movieSection2, movieSection3)
+        initViewModel()
+        initView()
+    }
+
+    private func initView() {
         view = AllMoviesView()
         (view as! AllMoviesView).setTableViewDataSourceDelegate(dataSourceDelegate: self)
+    }
+
+    private func initViewModel() {
+        viewModel = AllMoviesViewModel()
+
+        viewModel.reloadTableViewClosure = {
+            DispatchQueue.main.async { [weak self] in
+                (self?.view as! AllMoviesView).sectionTableView.reloadData()
+            }
+        }
+
+        viewModel.updateLoadingStatus = { [weak self] () in
+            DispatchQueue.main.async {
+                let isLoading = self?.viewModel.isLoading ?? false
+                if isLoading {
+                    self?.activityIndicator.startAnimating()
+                    UIView.animate(withDuration: 0.2, animations: {
+                        (self?.view as! AllMoviesView).sectionTableView.alpha = 0.0
+                    })
+                }else {
+                    self?.activityIndicator.stopAnimating()
+                    UIView.animate(withDuration: 0.2, animations: {
+                        (self?.view as! AllMoviesView).sectionTableView.alpha = 1.0
+                    })
+                }
+            }
+
+        }
+
+        viewModel.showAlertClosure = { [weak self] in
+            DispatchQueue.main.async {
+                if let message = self?.viewModel.alertMessage {
+                    self?.showAlert(message)
+                }
+            }
+        }
+    }
+
+    private func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
