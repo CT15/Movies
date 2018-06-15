@@ -71,10 +71,6 @@ class AllMoviesView: UIView {
         synopsisView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
     }
 
-    func expandSynopsisView() {
-        
-    }
-
     private func setTableView() {
         addSubview(sectionTableView)
         sectionTableView.topAnchor.constraint(equalTo: synopsisView.bottomAnchor).isActive = true
