@@ -38,3 +38,8 @@ This is, however, not a problem if storyboard is used for the layouts of UI elem
 
 Even though I do experiment with RxSwift and RxCocoa a little bit in this project, I do not focus too much on them. I am sure that
 there is a way / workaround to solve this issue, but I will leave that research for another project.
+
+## Additional Note
+
+The application UI is not iPhone X compatible because `safeAreaLayoutGuide` is not used when coding the UI elements layouts.
+It works fine with other iPhone and iPad simulators.
